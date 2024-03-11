@@ -40,3 +40,7 @@ echo "Total approximate space saved: $total_space_saved M"
 echo "Before deletion, disk usage: $(df -h / | tail -1 | awk '{print $3}')"
 echo "After cleaning kernel sources, disk usage: $(df -h / | tail -1 | awk '{print $3}')"
 echo "After deleting other files, disk usage: $(df -h / | tail -1 | awk '{print $3}')"
+
+# 注意：这个计算方式可能不够精确，因为它考虑的是整个分区而非特定目录的使用情况
+# 当目录所在分区还有其他文件时，此计算结果仅供参
+# rm -rf /usr/src/*未执行。
