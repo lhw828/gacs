@@ -3,12 +3,12 @@
 # 定义函数用于转换字节到MB或GB
 function convert_size {
     local size=$1
-    local gb=$(($size / 1024 / 1024 / 1024))
-    local mb=$(($size / 1024 / 1024 % 1024))
+    local gb=$(awk "BEGIN {printf \"%.1f\", ($size / 1024 / 1024 / 1024)}")
 
-    if [ $gb -gt 0 ]; then
-        echo "${gb}GB ${mb}MB"
+    if (( $(echo "$gb >= 1" | bc -l) )); then
+        echo "${gb}GB"
     else
+        local mb=$(awk "BEGIN {printf \"%d\", ($size / 1024 / 1024)}")
         echo "${mb}MB"
     fi
 }
